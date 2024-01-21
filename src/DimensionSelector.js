@@ -36,12 +36,11 @@ const DimensionSelector = ({
     }
   }
 
-  const handleSliderChange = (dimension, newValue) => {
+  const handleSliderChange = (dimension, newValue) =>
     setDimensionRanges({
       ...dimensionRanges,
       [dimension]: { min: newValue[0], max: newValue[1] },
     })
-  }
 
   return (
     <Grid item xs={12} md={2}>
@@ -49,8 +48,8 @@ const DimensionSelector = ({
         Dimensions | Ranges
       </Typography>
       <Divider sx={{mt: "12px"}} />
-      {dimensionOptions.map(dimension => (
-        <Box sx={{p: "12px 0"}}>
+      {dimensionOptions.map(dimension =>
+        <Box key={dimension} sx={{p: "12px 0"}}>
           <FormControlLabel
             control={
               <Checkbox
@@ -74,7 +73,7 @@ const DimensionSelector = ({
             max={dimensionBounds[dimension]?.max || 100}
           />
         </Box>
-      ))}
+      )}
     </Grid>
   )
 }

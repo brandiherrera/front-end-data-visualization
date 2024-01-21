@@ -171,6 +171,13 @@ const DataVisualization = ({ data }) => {
   }
 
   useEffect(() => {
+    if (!selectedDimensions.length)
+      d3.select("#visualization").selectAll("*").remove()
+    else if (selectedDimensions.length === 1)
+      return showSingleDimension()
+    else
+      return showMultipleDimensions()
+
     const bounds = {}
     const dimensionOptions = data?.length > 0 ? Object.keys(data[0]) : []
 
@@ -183,15 +190,6 @@ const DataVisualization = ({ data }) => {
     })
 
     setDimensionBounds(bounds)
-  }, [data])
-
-  useEffect(() => {
-    if (!selectedDimensions.length)
-      d3.select("#visualization").selectAll("*").remove()
-    else if (selectedDimensions.length === 1)
-      return showSingleDimension()
-    else
-      return showMultipleDimensions()
   }, [data, dimensionRanges, selectedDimensions])
 
   return (
